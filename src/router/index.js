@@ -1,10 +1,16 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import HomeView from '../views/HomeView.vue'
+import student from "@/views/student/student";
 
 Vue.use(VueRouter)
 
 const routes = [
+  {
+    path: '/student-list',
+    name: 'studentList',
+    component: student
+  },
   {
     path: '/',
     name: 'home',
