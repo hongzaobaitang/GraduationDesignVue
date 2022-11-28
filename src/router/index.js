@@ -1,18 +1,25 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import HomeView from '../views/HomeView.vue'
-import student from "@/views/student/student";
+import index from '../views/index.vue'
+import secondHands from '../views/secondHands.vue'
+import forum from '../views/forum.vue'
+import activity from '../views/activity'
+import selfCenter from "@/views/selfCenter";
+import selfInfo from "@/views/selfInfo";
+import accountSet from "@/views/accountSet";
+import selfFriend from "@/views/selfFriend";
+import systemSetting from "@/views/systemSetting";
+import dispatching from "@/views/dispatching";
+import loseAndFound from "@/views/loseAndFound";
 
 Vue.use(VueRouter)
 
 const routes = [
+
+
   {
-    path: '/student-list',
-    name: 'studentList',
-    component: student
-  },
-  {
-    path: '/',
+    path: '/home',
     name: 'home',
     component: HomeView
   },
@@ -26,10 +33,76 @@ const routes = [
   }
 ]
 
+
 const router = new VueRouter({
   mode: 'history',
   base: process.env.BASE_URL,
-  routes
+  routes: [
+    {path: '/selfCenter' ,component: selfCenter,
+    children: [
+      {
+        path: 'selfInfo',
+        component: selfInfo,
+
+      },{
+        path: 'accountSet',
+        component: accountSet
+      },{
+        path: 'selfFriend',
+        component: selfFriend
+      },
+      {
+        path: 'systemSetting',
+        component: systemSetting
+      },
+
+    ]},
+
+    {
+      path: '/loseAndFound',
+      name: 'loseAndFound',
+      component: loseAndFound
+    },
+    {
+      path: '/dispatching',
+      name: 'dispatching',
+      component: dispatching
+    },
+    {
+      path: '/',
+      name: 'index',
+      component: index
+    },
+
+    {
+      path: '/selfCenter',
+      name: 'selfCenter',
+      component: selfCenter,
+    },
+    {
+      path: '/activity',
+      name: 'activity',
+      component: activity,
+    },
+
+    {
+      path: '/forum',
+      name: 'forum',
+      component: forum
+    },
+    {
+      path: '/secondHands',
+      name: 'secondHands',
+      component: secondHands
+    },
+
+  ]
+
 })
 
+
+
+
+
 export default router
+

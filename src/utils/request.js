@@ -1,14 +1,16 @@
 import axios from 'axios'
 import merge from 'lodash/merge'
+import qs from 'qs'
+
 
 //创建axios实例，简写代码
 const request = axios.create({
     // `baseURL` 将自动加在 `url` 前面，除非 `url` 是一个绝对 URL。
     // 它可以通过设置一个 `baseURL` 便于为 axios 实例的方法传递相对 URL
-    baseURL: 'http://localhost:10000',  //
+    baseURL: 'http://192.168.0.14:10000',  //
     // `timeout` 指定请求超时的毫秒数(0 表示无超时时间)
     // 如果请求花费了超过 `timeout` 的时间，请求将被中断
-    timeout: 5000
+    timeout: 5000,
 })
 
 // request 拦截器
@@ -50,5 +52,17 @@ request.adornParams = (params = {}, openDefultParams = true) => {
         't': new Date().getTime()
     }
     return openDefultParams ? merge(defaults, params) : params
+}
+/**
+ * post请求数据处理
+ * @param {*} data 数据对象
+ * @param {*} openDefultdata 是否开启默认数据?
+ * @param {*} contentType 数据格式
+ *  json: 'application/json; charset=utf-8'
+ *  form: 'application/x-www-form-urlencoded; charset=utf-8'
+ */
+request.adornData = (data = {}, openDefultdata = true, contentType = 'json') => {
+
+    return contentType === 'json' ? JSON.stringify(data) : ""
 }
 export default request
